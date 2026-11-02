@@ -1,4 +1,4 @@
-# Zero-Cost Production Deployment Guide
+# Free Deployment Guide
 
 This guide details how to deploy your website and serverless application to **Cloudflare Pages** (primary recommendation), **Vercel**, or **GitHub Pages** for **\$0/month** without purchasing a domain or credit card.
 
@@ -6,14 +6,17 @@ This guide details how to deploy your website and serverless application to **Cl
 
 ## 1. Cloudflare Pages Deployment (Recommended)
 
-Cloudflare Pages provides global CDN distribution, unmetered bandwidth, automatic SSL, and native support for serverless edge functions (`/functions`).
+Cloudflare Pages provides global edge distribution, automated SSL, and native support for serverless edge functions (`/functions`).
 
-### Verified Free Plan Limits (Cloudflare Pages)
-* **Hosting Bandwidth:** Unlimited free bandwidth.
-* **Builds:** 500 builds per month (Free tier).
-* **Serverless Functions:** 100,000 requests per day (Free tier).
-* **Custom Domains:** Unlimited free custom domains with automated SSL certificates.
+### Verified Free Tier Limits (Cloudflare Pages)
+* **Static Asset Bandwidth:** Included under Cloudflare's standard Free Plan Fair Use Policy.
+* **Monthly Builds:** Up to 500 builds per month (1 concurrent build).
+* **Edge Functions (Workers):** Up to 100,000 requests per day across your account on the free tier.
+* **Custom Domains:** Supports free custom domain mapping with automated SSL renewals.
 * **Free Subdomain:** Provided automatically (`*.pages.dev`).
+
+> [!NOTE]
+> Functions run on ephemeral edge isolates. In-memory rate limiting and in-memory variables do not persist across separate edge isolates or function recycles. For persistent production state, connect an external database.
 
 ### Step-by-Step Instructions
 
@@ -52,9 +55,9 @@ Cloudflare will automatically build and deploy your site in under 60 seconds. Yo
 
 Vercel provides instant previews, global edge routing, and a free `*.vercel.app` subdomain.
 
-### Verified Free Plan Limits (Vercel Hobby)
-* **Bandwidth:** 100 GB / month.
-* **Serverless Execution:** 100 GB-hours / month.
+### Verified Free Plan Limits (Vercel Hobby Tier)
+* **Bandwidth:** 100 GB / month on Hobby tier.
+* **Serverless Execution:** Standard Hobby tier limits (100 GB-hours / month).
 * **Edge Requests:** 500,000 / month.
 
 ### Step-by-Step Instructions

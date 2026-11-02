@@ -12,16 +12,17 @@ const path = require("node:path");
 
 const PORT = process.env.PORT || 3000;
 const ROOT_DIR = __dirname;
+const DEMO_AUTH_TOKEN = process.env.DEMO_AUTH_TOKEN || "launchflow-demo-session-token-v1";
 
 // In-memory rate limiting map for local testing
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
 
-// In-memory items store for local CRUD testing
-const inMemoryItems = [
-  { id: "1", title: "Launch MVP on Cloudflare Pages", status: "Completed", date: "Today" },
-  { id: "2", title: "Validate first $100 service offer", status: "In Progress", date: "Tomorrow" },
+// In-memory items store for local CRUD demonstration
+const demoInMemoryItems = [
+  { id: "demo_1", title: "Launch MVP on Cloudflare Pages", status: "Completed", date: "Today" },
+  { id: "demo_2", title: "Validate first $100 service offer", status: "In Progress", date: "Tomorrow" },
 ];
 
 const MIME_TYPES = {
@@ -36,15 +37,15 @@ const MIME_TYPES = {
   ".txt": "text/plain; charset=utf-8",
 };
 
-// Export request handler and server instance
 function handleRequest(req, res) {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   let pathname = parsedUrl.pathname;
 
-  // Add default security headers for local dev testing
+  // Standard security headers (matching Cloudflare Pages _headers)
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
 
   // ============================================================================
   // 1. API ROUTES (Emulates Cloudflare Pages Functions)
@@ -56,46 +57,62 @@ function handleRequest(req, res) {
     return res.end(
       JSON.stringify({
         status: "healthy",
-        version: "1.0.0",
+        version: "1.0.1",
         timestamp: new Date().toISOString(),
         environment: "local-node-dev",
       })
     );
   }
 
-  // Route: /api/auth
+  // Route: /api/auth (Demonstration Only)
   if (pathname === "/api/auth" && req.method === "GET") {
     const authHeader = req.headers["authorization"];
     res.setHeader("Content-Type", "application/json");
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       res.writeHead(401);
-      return res.end(JSON.stringify({ authenticated: false, error: "Missing Bearer token." }));
-    }
-
-    const token = authHeader.split(" ")[1];
-    if (token === "demo-token" || token.startsWith("usr_")) {
-      res.writeHead(200);
       return res.end(
         JSON.stringify({
-          authenticated: true,
-          user: { id: "usr_local", email: "founder@example.com", role: "admin" },
+          authenticated: false,
+          isDemo: true,
+          error: "Missing or malformed Authorization header. Expected 'Bearer <token>'.",
         })
       );
     }
 
-    res.writeHead(403);
-    return res.end(JSON.stringify({ authenticated: false, error: "Invalid token." }));
+    const token = authHeader.split(" ")[1]?.trim();
+
+    // Strict check: only accept the configured demo token (No insecure arbitrary string fallback)
+    if (token === DEMO_AUTH_TOKEN) {
+      res.writeHead(200);
+      return res.end(
+        JSON.stringify({
+          authenticated: true,
+          isDemo: true,
+          warning: "DEMO MODE ONLY: Authenticated via static demo session token. Connect a real identity provider before production use.",
+          user: {
+            id: "demo_usr_founder",
+            email: "demo@example.com",
+            role: "demo_admin",
+          },
+        })
+      );
+    }
+
+    res.writeHead(401);
+    return res.end(
+      JSON.stringify({
+        authenticated: false,
+        isDemo: true,
+        error: "Invalid token. For demo testing, provide the configured demo token.",
+      })
+    );
   }
 
   // Route: /api/contact
   if (pathname === "/api/contact") {
     if (req.method === "OPTIONS") {
-      res.writeHead(204, {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      });
+      res.writeHead(204);
       return res.end();
     }
 
@@ -120,7 +137,7 @@ function handleRequest(req, res) {
       let rawBody = "";
       req.on("data", (chunk) => {
         rawBody += chunk;
-        if (rawBody.length > 1e6) req.destroy(); // Protect against payload flood
+        if (rawBody.length > 1e6) req.destroy();
       });
 
       req.on("end", () => {
@@ -131,36 +148,49 @@ function handleRequest(req, res) {
           // Honeypot bot trap
           if (honeypot && honeypot.trim().length > 0) {
             res.writeHead(200);
-            return res.end(JSON.stringify({ success: true, message: "Thank you for your message." }));
+            return res.end(
+              JSON.stringify({
+                success: true,
+                deliveredToEmail: false,
+                message: "Submission accepted.",
+              })
+            );
           }
 
           // Validation
-          if (!name || name.trim().length < 2) {
+          if (!name || typeof name !== "string" || name.trim().length < 2) {
             res.writeHead(400);
             return res.end(JSON.stringify({ success: false, error: "Name must be at least 2 characters." }));
           }
 
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!email || !emailRegex.test(email)) {
+          if (!email || typeof email !== "string" || !emailRegex.test(email)) {
             res.writeHead(400);
             return res.end(JSON.stringify({ success: false, error: "A valid email address is required." }));
           }
 
-          if (!message || message.trim().length < 10) {
+          if (!message || typeof message !== "string" || message.trim().length < 10) {
             res.writeHead(400);
             return res.end(JSON.stringify({ success: false, error: "Message must be at least 10 characters." }));
           }
 
-          // Record rate limit hit
           userRequests.push(now);
           rateLimitMap.set(clientIp, userRequests);
 
-          console.log(`[Contact] Message received from ${name} <${email}>`);
+          console.log(`[Contact Submission] From: ${name} <${email}>`);
+
+          // Transparent response: acknowledge logging, but do not claim email dispatch
           res.writeHead(200);
           return res.end(
             JSON.stringify({
               success: true,
-              message: "Thank you! Your message has been received securely.",
+              deliveredToEmail: false,
+              demoMode: true,
+              message: "Demo submission validated and logged on server. (Note: Email delivery requires configuring RESEND_API_KEY in .env).",
+              data: {
+                receivedAt: new Date().toISOString(),
+                sender: name.trim().replace(/[<>]/g, ""),
+              },
             })
           );
         } catch (err) {
@@ -172,13 +202,22 @@ function handleRequest(req, res) {
     }
   }
 
-  // Route: /api/data (CRUD testing)
+  // Route: /api/data (Ephemeral Demo CRUD)
   if (pathname === "/api/data") {
     res.setHeader("Content-Type", "application/json");
 
     if (req.method === "GET") {
       res.writeHead(200);
-      return res.end(JSON.stringify({ success: true, items: inMemoryItems }));
+      return res.end(
+        JSON.stringify({
+          success: true,
+          isDemoStore: true,
+          storageType: "ephemeral-in-memory",
+          warning: "DEMO DATA STORE: Data is held in volatile memory and is neither persistent nor private. Connect a database (e.g. Supabase, Cloudflare D1) for production storage.",
+          count: demoInMemoryItems.length,
+          items: demoInMemoryItems,
+        })
+      );
     }
 
     if (req.method === "POST") {
@@ -187,18 +226,31 @@ function handleRequest(req, res) {
       req.on("end", () => {
         try {
           const b = JSON.parse(raw || "{}");
+          if (!b.title || typeof b.title !== "string" || b.title.trim().length < 3) {
+            res.writeHead(400);
+            return res.end(JSON.stringify({ success: false, error: "Title must be at least 3 characters." }));
+          }
+
           const item = {
-            id: "item_" + Date.now(),
-            title: String(b.title || "Untitled").replace(/[<>]/g, ""),
+            id: "demo_" + Date.now(),
+            title: String(b.title).replace(/[<>]/g, "").trim(),
             status: b.status || "Active",
             date: new Date().toLocaleDateString(),
           };
-          inMemoryItems.unshift(item);
+          demoInMemoryItems.unshift(item);
           res.writeHead(201);
-          return res.end(JSON.stringify({ success: true, item }));
+          return res.end(
+            JSON.stringify({
+              success: true,
+              isDemoStore: true,
+              storageType: "ephemeral-in-memory",
+              message: "Item saved to ephemeral demo memory. (Will reset on server restart).",
+              item,
+            })
+          );
         } catch (e) {
           res.writeHead(400);
-          return res.end(JSON.stringify({ success: false, error: "Bad JSON." }));
+          return res.end(JSON.stringify({ success: false, error: "Invalid JSON format." }));
         }
       });
       return;
@@ -209,7 +261,6 @@ function handleRequest(req, res) {
   // 2. STATIC FILE SERVING
   // ============================================================================
 
-  // Clean URL resolution: /about -> /about.html, / -> /index.html
   if (pathname === "/") {
     pathname = "/index.html";
   } else if (!path.extname(pathname)) {
@@ -228,7 +279,6 @@ function handleRequest(req, res) {
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      // Serve custom 404 page
       const notFoundPath = path.join(ROOT_DIR, "404.html");
       if (fs.existsSync(notFoundPath)) {
         res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });

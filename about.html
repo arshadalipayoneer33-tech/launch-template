@@ -54,23 +54,23 @@
         <div class="card mb-4">
           <h3 style="margin-bottom: 1rem;">Our Mission</h3>
           <p>
-            <strong data-config="brand.name">LaunchFlow</strong> was created to give entrepreneurs, consultants, and indie builders a complete, production-grade web application template with <strong>\$0 operating costs</strong>.
+            <strong data-config="brand.name">LaunchFlow</strong> was created to give entrepreneurs, consultants, and indie builders a clean, reusable web application starter project to test ideas with <strong>\$0 initial software costs</strong>.
           </p>
           <p>
-            Instead of locking you into proprietary drag-and-drop site builders like Showit, Squarespace, or maintaining vulnerable WordPress databases, this project provides a clean, modern codebase based on open web standards: HTML5, CSS3, modular JavaScript, and edge serverless computing.
+            Instead of locking you into proprietary drag-and-drop site builders like Showit or maintaining vulnerable WordPress installations, this project provides a clean codebase based on open web standards: HTML5, CSS3, modular JavaScript, and serverless edge functions.
           </p>
         </div>
 
         <div id="security" class="card mb-4" style="border-left: 4px solid var(--color-primary);">
-          <h3 style="margin-bottom: 1rem;">Hardened Security Practices</h3>
-          <p>Security is not an afterthought. This template implements foundational defense-in-depth measures:</p>
+          <h3 style="margin-bottom: 1rem;">Foundational Security Practices (Demo Baseline)</h3>
+          <p>This starter implements baseline defensive practices, with clear requirements before handling live user data:</p>
           <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
             <li>🛡️ <strong>Zero Hardcoded Secrets:</strong> No API keys, passwords, or credentials exist in the client repository.</li>
-            <li>🛡️ <strong>Environment Variables:</strong> Production secrets are managed securely via <code>.env</code> or Cloudflare Dashboard.</li>
-            <li>🛡️ <strong>Client & Server Validation:</strong> All form submissions are validated twice—once for UX on the client, and strictly on the edge server.</li>
+            <li>🛡️ <strong>Environment Variables:</strong> Production secrets are managed via <code>.env</code> or Cloudflare Dashboard.</li>
             <li>🛡️ <strong>Honeypot Bot Trap:</strong> Invisible form fields catch automated spammers without frustrating human users with CAPTCHAs.</li>
-            <li>🛡️ <strong>IP-Based Edge Rate Limiting:</strong> In-memory rate limiting stops brute-force spam attacks.</li>
-            <li>🛡️ <strong>Strict Security Headers:</strong> Pre-configured <code>_headers</code> file with Content-Security-Policy (CSP), X-Frame-Options (DENY), and X-Content-Type-Options (nosniff).</li>
+            <li>🛡️ <strong>IP-Based Edge Rate Limiting:</strong> In-memory rate limiting reduces automated form spam (5 requests / 10 min).</li>
+            <li>🛡️ <strong>Security Headers:</strong> Pre-configured <code>_headers</code> file with HSTS (Strict-Transport-Security), X-Frame-Options (DENY), and X-Content-Type-Options (nosniff).</li>
+            <li>⚠️ <strong>Production Review Required:</strong> Authentication and data stores in this starter are labeled demo mocks. Connect an external database and real identity provider before production launch.</li>
           </ul>
         </div>
 

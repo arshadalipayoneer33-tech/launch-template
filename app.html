@@ -44,10 +44,10 @@
     <section class="section" style="padding-top: 3rem;">
       <div class="container">
         <!-- App Header & Live Health Bar -->
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color);">
           <div>
             <span class="section-tag" style="margin-bottom: 0.5rem;">Interactive Application Foundation</span>
-            <h1 style="font-size: 2rem; margin-bottom: 0.25rem;">Founder Control Center</h1>
+            <h1 style="font-size: 2rem; margin-bottom: 0.25rem;">Control Center (Demo)</h1>
             <p style="margin: 0; font-size: 0.95rem;">Modular dashboard structure with CRUD data state, mock authentication, and edge API health.</p>
           </div>
 
@@ -58,31 +58,41 @@
           </div>
         </div>
 
+        <!-- Demo Limitations Banner -->
+        <div class="card" style="background-color: var(--bg-surface); border-left: 4px solid var(--color-warning); padding: 1.25rem; margin-bottom: 2rem;">
+          <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">
+            ⚠️ Demo Mode Limitations
+          </div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+            This starter provides an interactive UI foundation. Records are saved in ephemeral demo memory and browser <code>localStorage</code>. It does <strong>not provide private, multi-user, or persistent storage</strong> until you connect an external database (e.g. Supabase or Cloudflare D1) and configure real authentication.
+          </div>
+        </div>
+
         <!-- Dashboard Top Row: User Profile & Quick Actions -->
         <div class="grid grid-3 mb-4">
           <!-- Auth State Card -->
           <div class="card" style="padding: 1.5rem;">
             <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
-              User Session
+              Session (Demo Simulation)
             </div>
             <div id="auth-status-container" style="margin-bottom: 1rem;">
               <!-- Dynamically populated by app-demo.js -->
             </div>
             <button id="auth-toggle-btn" class="btn btn-primary btn-sm w-full">
-              Simulate Demo Login
+              Verify Demo Auth Token
             </button>
           </div>
 
           <!-- Metrics 1 -->
           <div class="card" style="padding: 1.5rem;">
             <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">
-              Active Database Records
+              Demo Records
             </div>
             <div id="items-count" style="font-size: 2rem; font-weight: 800; color: var(--color-primary); line-height: 1; margin-bottom: 0.5rem;">
               3 Records
             </div>
             <div style="font-size: 0.825rem; color: var(--text-muted);">
-              Saved locally in browser localStorage (Supabase ready)
+              Stored locally in browser localStorage (Demo only)
             </div>
           </div>
 
@@ -101,7 +111,7 @@
         <!-- CRUD Management Interface -->
         <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 3rem;">
           <div style="padding: 1.5rem; background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color);">
-            <h3 style="margin-bottom: 0.5rem;">Application Data Store</h3>
+            <h3 style="margin-bottom: 0.5rem;">Demo Data Store</h3>
             <p style="margin: 0; font-size: 0.9rem;">
               Test creating, reviewing, and deleting records in this reactive state manager.
             </p>
@@ -124,12 +134,12 @@
         </div>
 
         <!-- Architecture Guidance Box for Developers -->
-        <div class="card" style="background-color: var(--bg-surface); border-left: 4px solid var(--color-accent);">
-          <h4 style="margin-bottom: 0.75rem;">💡 How to Connect Your Real Database & Auth in 3 Steps</h4>
+        <div class="card" style="background-color: var(--bg-surface); border-left: 4px solid var(--color-primary);">
+          <h4 style="margin-bottom: 0.75rem;">💡 Moving from Demo to Production (3 Steps)</h4>
           <ol style="margin-left: 1.25rem; font-size: 0.925rem; line-height: 1.8; color: var(--text-muted);">
-            <li><strong>Supabase Integration:</strong> Sign up for free at <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a>, create a project, and add your <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> to <code>.env</code>.</li>
-            <li><strong>Enable Real Auth:</strong> Swap the mock sign-in handler in <code>/public/js/app-demo.js</code> with the official Supabase JS SDK (<code>supabase.auth.signInWithPassword</code>).</li>
-            <li><strong>Persistent SQL:</strong> Connect <code>/functions/api/data.js</code> to your Supabase tables or Cloudflare D1 SQLite database to transition from local demo storage to multi-user cloud persistence.</li>
+            <li><strong>Persistent Database:</strong> Connect <code>/functions/api/data.js</code> to a managed database (such as Supabase PostgreSQL or Cloudflare D1) and enforce table-level permissions.</li>
+            <li><strong>Real Authentication:</strong> Replace the demo token check in <code>/functions/api/auth.js</code> with cryptographic JWT verification via Supabase Auth or Clerk.</li>
+            <li><strong>Email Forwarding:</strong> Set <code>RESEND_API_KEY</code> and <code>CONTACT_RECIPIENT_EMAIL</code> in your <code>.env</code> file or Cloudflare Pages environment variables to receive live contact submissions.</li>
           </ol>
         </div>
       </div>

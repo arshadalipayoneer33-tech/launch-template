@@ -1,13 +1,14 @@
 {
   "name": "launchflow-starter",
-  "version": "1.0.0",
-  "description": "Zero-cost, secure, reusable website and application starter template for modern online businesses.",
+  "version": "1.0.1",
+  "description": "Zero-cost, reusable website and application starter template for modern online businesses.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "test": "node test_runner.js",
-    "test:py": "python3 test_runner.py"
+    "test:py": "python3 test_runner.py",
+    "package:zip": "zip -r launchflow-starter.zip . -x './.git/*' -x '.git/*' -x './.git' -x '.git' -x '*node_modules*' -x '*.DS_Store*' -x 'launchflow-starter.zip'"
   },
   "keywords": [
     "saas-starter",

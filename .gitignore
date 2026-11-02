@@ -9,18 +9,28 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+*.env
 *.pem
 *.key
+*.crt
+*.cert
+*.pfx
+*.p12
+credentials.json
+id_rsa*
+*.secret
 
 # Operating System Files
 .DS_Store
 Thumbs.db
 
-# Build & Cache Directories
+# Build, Output, & Temporary Files
 .cache/
 dist/
 .wrangler/
 .vercel/
+*.zip
+*.tar.gz
 
 # Logs
 npm-debug.log*

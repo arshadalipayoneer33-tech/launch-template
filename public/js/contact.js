@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Reset Errors
     clearErrors();
 
-    // 2. Extract and Sanitize Form Values
+    // 2. Extract Form Values
     const nameInput = form.querySelector("#name");
     const emailInput = form.querySelector("#email");
     const subjectInput = form.querySelector("#subject");
     const messageInput = form.querySelector("#message");
-    const honeypotInput = form.querySelector("#website_hp"); // Anti-bot honeypot
+    const honeypotInput = form.querySelector("#website_hp");
 
     const payload = {
       name: nameInput ? nameInput.value.trim() : "",
@@ -48,14 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!payload.message || payload.message.length < 10) {
-      showError("message", "Please enter a detailed message (minimum 10 characters).");
+      showError("message", "Please enter a message (minimum 10 characters).");
       hasError = true;
     }
 
     // Bot detection check
     if (payload.honeypot) {
       console.warn("[Security] Bot honeypot triggered.");
-      showToast("Message submission rejected.", "error");
+      showToast("Submission rejected.", "error");
       return;
     }
 
@@ -77,17 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json().catch(() => ({}));
 
       if (response.ok && result.success) {
-        showToast(result.message || "Thank you! Your message has been sent successfully.", "success", 5000);
+        if (result.deliveredToEmail) {
+          showToast(result.message || "Thank you! Your message has been forwarded to our team.", "success", 5000);
+        } else {
+          showToast(result.message || "Demo submission validated and logged on server. (Email delivery requires configuring RESEND_API_KEY in .env).", "info", 7000);
+        }
         form.reset();
       } else if (response.status === 429) {
-        showToast("Rate limit exceeded: You have sent too many requests. Please wait a few minutes.", "error", 6000);
+        showToast("Rate limit exceeded: Maximum 5 submissions per 10 minutes from this IP.", "error", 6000);
       } else {
-        const errorMsg = result.error || "Unable to send message. Please try again later or contact support directly.";
+        const errorMsg = result.error || "Unable to send message. Please verify input fields.";
         showToast(errorMsg, "error", 5000);
       }
     } catch (err) {
       console.error("[ContactForm] Network error:", err);
-      showToast("Network connection error. If you are running locally without the backend API, submissions are simulated.", "info", 5000);
+      showToast("Network error. If running without a live backend, submissions cannot be processed.", "error", 5000);
     } finally {
       setLoading(false);
     }
@@ -111,6 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function setLoading(isLoading) {
     if (!submitBtn) return;
     submitBtn.disabled = isLoading;
-    submitBtn.textContent = isLoading ? "Sending Message..." : originalBtnText;
+    submitBtn.textContent = isLoading ? "Validating & Logging..." : originalBtnText;
   }
 });

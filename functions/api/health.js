@@ -1,19 +1,18 @@
 /**
  * Cloudflare Pages Function: /api/health
- * Returns API system status, edge region, and timestamp
+ * Returns API system status, edge region, and timestamp.
  */
 export async function onRequestGet(context) {
   const headers = {
     "Content-Type": "application/json",
     "Cache-Control": "no-store, no-cache, must-revalidate",
-    "Access-Control-Allow-Origin": "*",
+    "X-Content-Type-Options": "nosniff",
   };
 
   const statusPayload = {
     status: "healthy",
-    version: "1.0.0",
+    version: "1.0.1",
     timestamp: new Date().toISOString(),
-    uptime: "99.99%",
     region: context.request.cf ? context.request.cf.colo : "local-edge",
     service: "LaunchFlow Edge API",
   };

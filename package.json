@@ -1,0 +1,22 @@
+{
+  "name": "launchflow-starter",
+  "version": "1.0.0",
+  "description": "Zero-cost, secure, reusable website and application starter template for modern online businesses.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test_runner.js",
+    "test:py": "python3 test_runner.py"
+  },
+  "keywords": [
+    "saas-starter",
+    "cloudflare-pages",
+    "zero-cost",
+    "web-template",
+    "serverless",
+    "business-starter"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}

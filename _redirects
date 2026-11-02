@@ -1,0 +1,9 @@
+# ==============================================================================
+# CLOUDFLARE PAGES REDIRECTS & ROUTING RULES (_redirects)
+# ==============================================================================
+
+# Custom 404 Error handling
+/*  /404.html  404
+
+# Canonical trailing slash or clean URL rules if needed
+/home  /  301

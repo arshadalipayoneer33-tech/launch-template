@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchFlow — High-Performance Web & App Starter</title>
+  <meta name="description" content="A reusable, open-source website and application starter template. 100% free hosting, hardened edge security, and serverless functions ready for your next online business.">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LaunchFlow — High-Performance Web & App Starter">
+  <meta property="og:description" content="Zero-cost hosting, edge security, and modular architecture.">
+  <meta property="og:image" content="/favicon.svg">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="stylesheet" href="/public/css/components.css">
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span class="brand-icon" data-config="brand.logoIcon">⚡</span>
+        <span data-config="brand.logoText">LaunchFlow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="/#features" class="nav-link">Features</a></li>
+          <li><a href="/app.html" class="nav-link">App Demo</a></li>
+          <li><a href="/#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="/about.html" class="nav-link">About</a></li>
+          <li><a href="/contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+        <a href="/app.html" class="btn btn-primary btn-sm">Launch App</a>
+        <button class="mobile-menu-btn" aria-label="Open Navigation Menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span>🚀</span>
+          <span>Zero-Cost Open Source Template</span>
+        </div>
+        <h1 class="hero-title">
+          Build & Launch Your Next Online Business <span style="color: var(--color-primary);" data-config="brand.accentWord">Fast.</span>
+        </h1>
+        <p class="hero-subtitle" data-config="brand.description">
+          A modular, secure, and production-grade web foundation. Deploys completely free on Cloudflare Pages or GitHub Pages with zero vendor lock-in.
+        </p>
+        <div class="hero-actions">
+          <a href="/app.html" class="btn btn-primary btn-lg">Explore Live App Demo →</a>
+          <a href="/contact.html" class="btn btn-secondary btn-lg">Get in Touch</a>
+        </div>
+
+        <!-- Live Teaser Preview Box -->
+        <div class="hero-preview">
+          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; gap: 0.5rem;">
+              <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #ef4444; display: inline-block;"></span>
+              <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #f59e0b; display: inline-block;"></span>
+              <span style="width: 12px; height: 12px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+              status: production-ready • zero-cost hosting
+            </div>
+          </div>
+          <div style="text-align: left; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted); line-height: 1.8;">
+            <p style="margin-bottom: 0.5rem;"><span style="color: var(--color-primary);">const</span> business = <span style="color: var(--color-accent);">new</span> OnlineBusiness({</p>
+            <p style="padding-left: 1.5rem; margin-bottom: 0.2rem;">name: <span style="color: #f59e0b;">"Your Next SaaS / Agency"</span>,</p>
+            <p style="padding-left: 1.5rem; margin-bottom: 0.2rem;">hostingCost: <span style="color: var(--color-accent); font-weight: bold;">$0.00 / month</span>,</p>
+            <p style="padding-left: 1.5rem; margin-bottom: 0.2rem;">securityHeaders: <span style="color: var(--color-accent);">true</span>,</p>
+            <p style="padding-left: 1.5rem; margin-bottom: 0.2rem;">serverlessEdgeApi: <span style="color: var(--color-accent);">true</span></p>
+            <p style="margin-bottom: 0;">});</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="section" style="background-color: var(--bg-surface);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Core Capabilities</span>
+          <h2>Engineered for Speed, Security, and Scalability</h2>
+          <p>Everything you need to launch a high-converting digital storefront without paying monthly platform subscriptions.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">100% Free Hosting</h3>
+            <p class="card-desc">Deploy with one click to Cloudflare Pages, Vercel, or GitHub Pages. Zero hosting bills, free SSL, and unmetered global bandwidth.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3 class="card-title">Pre-Configured Security</h3>
+            <p class="card-desc">Production-grade Content Security Policy (CSP), anti-clickjacking headers, honeypot spam traps, and edge IP rate limiting.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📱</div>
+            <h3 class="card-title">Mobile-First & Responsive</h3>
+            <p class="card-desc">Fluid CSS layouts with system font stacks. Zero heavyweight frameworks or bloated JavaScript bundles slowing down page load.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔌</div>
+            <h3 class="card-title">Serverless Backend Functions</h3>
+            <p class="card-desc">Includes functional edge endpoints for health checks, contact form submissions, and authentication token validation.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎨</div>
+            <h3 class="card-title">Centralized Rebranding</h3>
+            <p class="card-desc">Change your site name, brand colors, contact info, and pricing tiers in a single <code>site.config.js</code> file.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🚀</div>
+            <h3 class="card-title">Micro-SaaS Foundation</h3>
+            <p class="card-desc">Includes an interactive client dashboard with CRUD data persistence and pre-wired hooks for Supabase or Firebase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Comparison Section -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Simple Pricing</span>
+          <h2>Predictable Plans for Any Business Model</h2>
+          <p>Easily customize these tiers in <code>site.config.js</code> to sell digital products, consulting packages, or SaaS subscriptions.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <!-- Starter Tier -->
+          <div class="pricing-card">
+            <span class="pricing-badge">Free</span>
+            <h3>Starter</h3>
+            <p class="text-muted" style="font-size: 0.9rem;">Test an idea and launch your first digital storefront.</p>
+            <div class="pricing-price">$0 <span class="pricing-period">/ forever</span></div>
+            <ul class="pricing-features">
+              <li>100% Free Hosting on Cloudflare</li>
+              <li>Automated SSL Certificate</li>
+              <li>Complete 6-Page Website</li>
+              <li>Client-Side State Storage</li>
+              <li>Open-Source Codebase</li>
+            </ul>
+            <a href="/app.html" class="btn btn-secondary w-full">Start Free Demo</a>
+          </div>
+
+          <!-- Growth Tier (Highlighted) -->
+          <div class="pricing-card highlighted">
+            <span class="pricing-badge">Most Popular</span>
+            <h3>Growth</h3>
+            <p class="text-muted" style="font-size: 0.9rem;">Perfect for solopreneurs launching micro-SaaS and client portals.</p>
+            <div class="pricing-price">$29 <span class="pricing-period">/ one-time</span></div>
+            <ul class="pricing-features">
+              <li>Everything in Starter</li>
+              <li>Serverless Edge Form Handling</li>
+              <li>Pre-Wired Supabase Auth Hook</li>
+              <li>IP-Based Rate Limiting Protection</li>
+              <li>Priority Support & Updates</li>
+            </ul>
+            <a href="/contact.html?plan=growth" class="btn btn-primary w-full">Get Growth Pack</a>
+          </div>
+
+          <!-- Agency Tier -->
+          <div class="pricing-card">
+            <span class="pricing-badge">Scale</span>
+            <h3>Agency</h3>
+            <p class="text-muted" style="font-size: 0.9rem;">Commercial license to build and flip client sites.</p>
+            <div class="pricing-price">$99 <span class="pricing-period">/ one-time</span></div>
+            <ul class="pricing-features">
+              <li>Everything in Growth</li>
+              <li>Unlimited Commercial Client Builds</li>
+              <li>White-Label Documentation</li>
+              <li>Multi-Project Deployment Scripts</li>
+              <li>1-on-1 Architecture Guidance</li>
+            </ul>
+            <a href="/contact.html?plan=agency" class="btn btn-secondary w-full">Get Agency License</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section class="section" style="background-color: var(--bg-surface);">
+      <div class="container" style="max-width: 800px;">
+        <div class="section-header">
+          <span class="section-tag">FAQ</span>
+          <h2>Frequently Asked Questions</h2>
+          <p>Common questions regarding hosting limits, technology choices, and customization.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="card" style="padding: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem;">Is this template completely free to host and deploy?</h4>
+            <p class="card-desc">Yes. The frontend and serverless edge functions deploy 100% free on Cloudflare Pages, Vercel Hobby, or GitHub Pages. You get automatic HTTPS and a free subdomain (e.g., <code>yourbrand.pages.dev</code>) without paying for hosting or a domain.</p>
+          </div>
+          <div class="card" style="padding: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem;">How do I rebrand this template for a new business?</h4>
+            <p class="card-desc">Open <code>site.config.js</code> and update your brand name, colors, contact emails, and navigation links. The template automatically updates all pages and CSS variables without manual HTML refactoring.</p>
+          </div>
+          <div class="card" style="padding: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem;">Can I connect a database like Supabase or Cloudflare D1?</h4>
+            <p class="card-desc">Yes. The starter includes pre-structured API endpoints in <code>/functions/api/data.js</code> and pre-wired client hooks in <code>/public/js/app-demo.js</code> ready for Supabase, Firebase, or Cloudflare D1 integration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Call-to-Action -->
+    <section class="section" style="text-align: center;">
+      <div class="container" style="max-width: 750px;">
+        <h2>Ready to Launch Your Online Business?</h2>
+        <p>Clone the starter, personalize your config, and deploy to the global edge in under 5 minutes.</p>
+        <div class="flex justify-center gap-2 mt-4" style="flex-wrap: wrap;">
+          <a href="/app.html" class="btn btn-primary btn-lg">Test the App Foundation →</a>
+          <a href="/contact.html" class="btn btn-secondary btn-lg">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="brand-logo" style="margin-bottom: 1rem;">
+            <span class="brand-icon" data-config="brand.logoIcon">⚡</span>
+            <span data-config="brand.logoText">LaunchFlow</span>
+          </a>
+          <p data-config="brand.description" style="font-size: 0.925rem; max-width: 320px;">
+            The zero-cost website and application launchpad for modern online businesses.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="/app.html">Application Demo</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="/api/health">Edge API Health</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/contact.html">Contact Support</a></li>
+            <li><a href="/about.html#security">Security Practices</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="current-year">2026</span> <span data-config="brand.name">LaunchFlow</span>. All rights reserved.
+        </div>
+        <div>
+          Built with open standards • Independent of Showit & WordPress
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="/site.config.js"></script>
+  <script src="/public/js/config-loader.js"></script>
+  <script src="/public/js/main.js"></script>
+</body>
+</html>

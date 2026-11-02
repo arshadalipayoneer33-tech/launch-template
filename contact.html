@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — LaunchFlow</title>
+  <meta name="description" content="Get in touch with our team for support, business inquiries, or custom consulting packages.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="stylesheet" href="/public/css/components.css">
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span class="brand-icon" data-config="brand.logoIcon">⚡</span>
+        <span data-config="brand.logoText">LaunchFlow</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/#features" class="nav-link">Features</a></li>
+          <li><a href="/app.html" class="nav-link">App Demo</a></li>
+          <li><a href="/#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="/about.html" class="nav-link">About</a></li>
+          <li><a href="/contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+        <a href="/app.html" class="btn btn-primary btn-sm">Launch App</a>
+        <button class="mobile-menu-btn" aria-label="Open Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container" style="max-width: 1000px;">
+        <div class="section-header text-left" style="margin-bottom: 3rem;">
+          <span class="section-tag">Direct Communication</span>
+          <h1>Get in Touch With Our Team</h1>
+          <p class="hero-subtitle" style="font-size: 1.15rem; margin: 0;">
+            Have a question about the template, need custom deployment support, or want to discuss a partnership? Send us a message below.
+          </p>
+        </div>
+
+        <div class="grid grid-2" style="gap: 3rem; align-items: flex-start;">
+          <!-- Contact Details Column -->
+          <div>
+            <div class="card mb-4">
+              <h3 style="margin-bottom: 1.25rem;">Contact Information</h3>
+              
+              <div style="margin-bottom: 1.25rem;">
+                <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted);">Support Email</div>
+                <div style="font-size: 1.05rem; margin-top: 0.2rem;">
+                  <a href="mailto:support@launchflow-demo.com" data-config="contact.supportEmail" data-config-href="contact.supportEmail">support@launchflow-demo.com</a>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 1.25rem;">
+                <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted);">Office Location</div>
+                <div style="font-size: 1.05rem; margin-top: 0.2rem;" data-config="contact.address">
+                  742 Evergreen Terrace, Suite 100, San Francisco, CA 94107
+                </div>
+              </div>
+
+              <div>
+                <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted);">Response Time</div>
+                <div style="font-size: 1.05rem; margin-top: 0.2rem;" data-config="contact.workingHours">
+                  Monday - Friday, 9:00 AM - 6:00 PM EST (under 24h reply)
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="background-color: var(--bg-surface);">
+              <h4 style="margin-bottom: 0.5rem;">🔒 Security & Privacy Notice</h4>
+              <p class="card-desc">
+                We never sell, rent, or share your contact data. All incoming transmissions are protected by HTTPS encryption, and submissions are rate-limited to avoid automated abuse.
+              </p>
+            </div>
+          </div>
+
+          <!-- Contact Form Column -->
+          <div class="card">
+            <h3 style="margin-bottom: 1.5rem;">Send a Secure Message</h3>
+            
+            <form id="contact-form" novalidate>
+              <!-- Anti-bot honeypot field (hidden from legitimate users) -->
+              <div class="visually-hidden">
+                <label for="website_hp">Leave this field blank</label>
+                <input type="text" id="website_hp" name="website_hp" tabindex="-1" autocomplete="off">
+              </div>
+
+              <!-- Name Field -->
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name *</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Jane Doe" required maxlength="80">
+                <div id="name-error" class="form-error"></div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="jane@company.com" required maxlength="120">
+                <div id="email-error" class="form-error"></div>
+              </div>
+
+              <!-- Subject Field -->
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <select id="subject" name="subject" class="form-select">
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Support Request">Technical Support</option>
+                  <option value="Consulting Package">Consulting / Custom Development</option>
+                  <option value="Partnership">Partnership / Affiliate</option>
+                </select>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group">
+                <label for="message" class="form-label">Message *</label>
+                <textarea id="message" name="message" class="form-textarea" placeholder="How can we help your business today?..." required maxlength="3000"></textarea>
+                <div id="message-error" class="form-error"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-full btn-lg">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© <span id="current-year">2026</span> <span data-config="brand.name">LaunchFlow</span>. All rights reserved.</div>
+        <div><a href="/privacy.html">Privacy Policy</a> • <a href="/terms.html">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/site.config.js"></script>
+  <script src="/public/js/config-loader.js"></script>
+  <script src="/public/js/main.js"></script>
+  <script src="/public/js/contact.js"></script>
+</body>
+</html>

@@ -73,6 +73,24 @@ export async function onRequestGet(context) {
     }
   }
 
+  // Never fall back to demo authentication when Supabase
+// is configured or production mode is enabled.
+if (
+  env?.SUPABASE_URL ||
+  env?.SUPABASE_ANON_KEY ||
+  env?.NODE_ENV === "production" ||
+  env?.AUTH_MODE === "production"
+) {
+  return new Response(
+    JSON.stringify({
+      authenticated: false,
+      isDemo: false,
+      error: "Authentication failed.",
+    }),
+    { status: 401, headers }
+  );
+}
+
   // 3. Demo Mode: Only accept the explicitly configured demo token
   const EXPECTED_DEMO_TOKEN = env?.DEMO_AUTH_TOKEN || "launchflow-demo-session-token-v1";
 
